@@ -21,6 +21,7 @@ def clean_data(df):
     convert all the columns that have yes/no to 0/1, 
     create dummy vars from 'gender', 'contract_type', 'internet_service_type', 'payment_type',
     change total_charges to a float type. 
+    (remove spaces and -), lower case for all column names
     '''
 
     #clean data
@@ -52,7 +53,7 @@ def clean_data(df):
     col_list = list(df.select_dtypes('object').columns)[1:]
     #create a dummy df
     for col in col_list:
-        dummy_df = pd.get_dummies(df[col], drop_first=True)
+        dummy_df = pd.get_dummies(df[col])
          ## Concatenate the dummy_df dataframe above with the original df
         df = pd.concat([df, dummy_df], axis=1)
     # drop the columns that we already use to create dummy_df
@@ -65,4 +66,7 @@ def clean_data(df):
     df.rename(columns={'None':'has_internet'}, inplace= True )
     #changing the values to undestand better the meaning
     df['has_internet'] = df['has_internet'].replace({0: 1, 1: 0})
+    # columns name change (remove space and -)
+    df_clean.columns = [col.lower().replace(' ', '_').replace('-','_') for col in df_clean]
+    df_clean.columns
     return df
