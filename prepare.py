@@ -67,6 +67,29 @@ def clean_data(df):
     #changing the values to undestand better the meaning
     df['has_internet'] = df['has_internet'].replace({0: 1, 1: 0})
     # columns name change (remove space and -)
-    df_clean.columns = [col.lower().replace(' ', '_').replace('-','_') for col in df_clean]
-    df_clean.columns
+    df.columns = [col.lower().replace(' ', '_').replace('-','_') for col in df]
+    df.columns
     return df
+
+
+def split_data(df):
+    '''
+    take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
+    return train, validate, test DataFrames.
+    '''
+    train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify=df.churn)
+    train, validate = train_test_split(train_validate, 
+                                       test_size=.3, 
+                                       random_state=123, 
+                                       stratify=train_validate.churn)
+    return train, validate, test
+
+
+
+# plot distributions
+def distribution (df):
+    cols =df.columns.to_list()
+    for col in cols[4:]:
+        plt.hist(df[col])
+        plt.title(f'Distribution of {col}')
+        plt.show()
