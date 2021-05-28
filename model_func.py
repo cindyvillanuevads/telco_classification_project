@@ -249,13 +249,13 @@ def compare_metrics (model, name_dataset1, X, y, name_dataset2,  X2, y2 ):
     #conf Matrix
     #model 1
     conf_1 = confusion_matrix(y, pred_1)
-    mat_1 =  pd.DataFrame ((confusion_matrix(y, pred_1 )),index = ['actual_dead','actual_survived'], columns =['pred_dead','pred_survived' ])
+    mat_1 =  pd.DataFrame ((confusion_matrix(y, pred_1 )),index = ['actual_no_churn','actual_churn'], columns =['pred_no_churn','pred_churn' ])
     rubric_df = pd.DataFrame([['TN', 'FP'], ['FN', 'TP']], columns=mat_1.columns, index=mat_1.index)
     cf_1 = rubric_df + ' : ' + mat_1.values.astype(str)
     
     #model2
     conf_2 = confusion_matrix(y2, pred_2)
-    mat_2 =  pd.DataFrame ((confusion_matrix(y2, pred_2 )),index = ['actual_dead','actual_survived'], columns =['pred_dead','pred_survived' ])
+    mat_2 =  pd.DataFrame ((confusion_matrix(y2, pred_2 )),index = ['actual_no_churn','actual_churn'], columns =['pred_no_churn','pred_churn' ])
     cf_2 = rubric_df + ' : ' + mat_2.values.astype(str)
     #model 1
     #assign the values
@@ -286,11 +286,11 @@ def compare_metrics (model, name_dataset1, X, y, name_dataset2,  X2, y2 ):
     #classification report
     #model1
     clas_rep_1 =pd.DataFrame(classification_report(y, pred_1, output_dict=True)).T
-    clas_rep_1.rename(index={'0': "dead", '1': "survived"}, inplace = True)
+    clas_rep_1.rename(index={'0': "no_churn", '1': "churn"}, inplace = True)
 
     #model2
     clas_rep_2 =pd.DataFrame(classification_report(y2, pred_2, output_dict=True)).T
-    clas_rep_2.rename(index={'0': "dead", '1': "survived"}, inplace = True)
+    clas_rep_2.rename(index={'0': "no_churn", '1': "churn"}, inplace = True)
     print(f'''
     ******    {name_dataset1}       ******                              ******     {name_dataset2}    ****** 
        Overall Accuracy:  {acc_1:.2%}              |                Overall Accuracy:  {acc_2:.2%}  
@@ -302,7 +302,7 @@ def compare_metrics (model, name_dataset1, X, y, name_dataset2,  X2, y2 ):
     _________________________________________________________________________________
     ''')
     print('''
-    Positive =  'survived'
+    Positive =  'churn'
     Confusion Matrix
     ''')
     cf_1_styler = cf_1.style.set_table_attributes("style='display:inline'").set_caption(f'{name_dataset1} Confusion Matrix')
