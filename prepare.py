@@ -1,13 +1,8 @@
 import seaborn as sns
 import os
-from pydataset import data
-from scipy import stats
 import pandas as pd
 import numpy as np
-
 from sklearn.model_selection import train_test_split
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, MinMaxScaler
 
 # ignore warnings
 import warnings
@@ -21,7 +16,6 @@ def clean_data(df):
     convert all the columns that have yes/no to 0/1, 
     create dummy vars from 'gender', 'contract_type', 'internet_service_type', 'payment_type',
     change total_charges to a float type. 
-    (remove spaces and -), lower case for all column names
     '''
 
     #clean data
@@ -44,7 +38,7 @@ def clean_data(df):
     }
     #use a for loop to change every column
     for col in col_list[2:8]:
-      df[col]= df[col].map(var) 
+        df[col]= df[col].map(var) 
     
     #replace the values of multiple_lines
     df.replace({'multiple_lines': {'No':1, 'Yes':2, 'No phone service': 0}}, inplace=True)
@@ -62,6 +56,8 @@ def clean_data(df):
     #drop duplicates columns
     df.drop(columns = ['payment_type_id', 'internet_service_type_id','contract_type_id'], inplace=True)
     
+    # rename 'tenure' so it can be more clear that the tenure is in months
+    df.rename(columns={'tenure':'tenure_months'}, inplace= True)
     #  rename the column as has_internet
     df.rename(columns={'None':'has_internet'}, inplace= True )
     #changing the values to undestand better the meaning
@@ -74,8 +70,8 @@ def clean_data(df):
 
 def split_data(df):
     '''
-    take in a DataFrame and return train, validate, and test DataFrames; stratify on survived.
-    return train, validate, test DataFrames.
+    take in a DataFrame and return train, validate, and test DataFrames; stratify on churn.
+    
     '''
     train_validate, test = train_test_split(df, test_size=.2, random_state=123, stratify=df.churn)
     train, validate = train_test_split(train_validate, 
@@ -83,6 +79,21 @@ def split_data(df):
                                        random_state=123, 
                                        stratify=train_validate.churn)
     return train, validate, test
+
+def prepare (df):
+    '''
+    take in a DataFrame and use two functions
+    1. clean data:
+    drop duplicates, change total_charges to a float type, rename columns, convert all the columns that have yes/no to 0/1, 
+    drop payment_type_id', 'internet_service_type_id','contract_type_id', create dummy vars from 'gender', 'contract_type',
+    'internet_service_type', 'payment_type'
+    2. split
+    return train, validate, and test DataFrames; stratify on churn
+    '''
+    clean_data(df)
+    split_data(df)
+
+    return df
 
 
 
