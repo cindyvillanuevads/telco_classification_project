@@ -2,6 +2,7 @@ import seaborn as sns
 import os
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 
 # ignore warnings
@@ -89,18 +90,35 @@ def prepare (df):
     'internet_service_type', 'payment_type'
     2. split
     return train, validate, and test DataFrames; stratify on churn
+    Example:
+    train, validate, test = .prepare(df)
     '''
-    clean_data(df)
-    split_data(df)
+    clean_df =clean_data(df)
+    train, validate, test = split_data(clean_df)
 
-    return df
+    return train, validate, test
 
 
 
 # plot distributions
 def distribution (df):
     cols =df.columns.to_list()
-    for col in cols[4:]:
-        plt.hist(df[col])
-        plt.title(f'Distribution of {col}')
-        plt.show()
+    for col in cols:
+        if df[col].dtype != 'object':
+            plt.hist(df[col])
+            plt.title(f'Distribution of {col}')
+            plt.xlabel('values')
+            plt.ylabel('Counts of customers')
+            plt.show()
+
+
+# plot distributions
+def distribution_obj (df):
+    cols =df.columns.to_list()
+    for col in cols[1:]:
+        if df[col].dtype == 'object':
+            plt.hist(df[col])
+            plt.title(f'Distribution of {col}')
+            plt.xlabel('values')
+            plt.ylabel('Counts of customers')
+            plt.show()
