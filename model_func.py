@@ -20,10 +20,10 @@ def split_Xy (df, column):
     '''
     Take in a DataFrame (train, validate, test) and return X and y; .
     df: train, validate or  test. Select one
-    column: which columns you want to  stratify on. Ex. stratify on 'survived'
-    return X, y  DataFrames.
+    column: which column you want to  stratify on. Ex. stratify on 'churn'
+    return X_df, y_df.
     Example:
-    X_validate, y_validate = model.split_Xy(validate, 'survived') 
+    X_validate, y_validate = split_Xy(validate, 'survived') 
     '''
     X_df = df.drop(columns= column)
     y_df = df[[column]]
