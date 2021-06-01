@@ -43,11 +43,7 @@ bank_transfer_(automatic)|type of payment| unit8| 0/1 |
 credit_card_(automatic) |type of payment| unit8 | 0/1 |
 electronic_check |type of payment| unit8 | 0/1 |
 mailed_check |type of payment| unit8 | 0/1 |
-
-_____________________________________
-| Target | Definition | Data Type | Values |
-| ----- | ----- | ----- |
-|churn|Indicates whether a customer has terminated service| int64| 0/1 |
+churn | Indicates whether a customer has terminated service | int64 | 0/1 |
 
 #### PROJECT PLANNIG
 
