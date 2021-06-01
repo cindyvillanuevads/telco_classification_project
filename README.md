@@ -1,5 +1,5 @@
 #### PROJECT DESCRIPTION
-- Predict customer churn at Telco, a telecommunications company, using a machine learning classification model, u
+- Predict customer churn at Telco, a telecommunications company, using a machine learning classification model.
 
 #### GOALS 
 
@@ -7,14 +7,14 @@
 
 - Construct a ML classification model that accurately predicts customer churn.
 
-- Document your process well enough to be presented or read like a report
+- Document your process well enough to be presented or read like a report.
 
 
 #### DATA DICTIONARY
 ---
 | Attribute | Definition | Data Type | Values|
 | ----- | ----- | ----- | ----- |
-|customer\_id|Alpha-numeric ID that identifies each customer| object | uniques ids|
+|customer\_id|Alpha-numeric ID that identifies each customer| object | unique ids|
 senior_citizen|Indicates if the customer is 65 or older| int64 | 0/1 |
 partner|If a customer is married| int64 | 0/1 |
 dependents|Indicates if a customer lives with dependents| int64 | 0/1 |
@@ -45,7 +45,7 @@ electronic_check |type of payment| unit8 | 0/1 |
 mailed_check |type of payment| unit8 | 0/1 |
 
 _____________________________________
-| Target | Definition | Data Type |
+| Target | Definition | Data Type | Values |
 | ----- | ----- | ----- |
 |churn|Indicates whether a customer has terminated service| int64| 0/1 |
 
@@ -77,8 +77,8 @@ _____________________________________
 
 
 #### DELIVER:
-- a Jupyter Notebook Report showing process and analysis with goal of finding drivers for customer churn.
-- a README.md file containing project description with goals, a data dictionary, project planning (lay out your process through the data science pipeline), instructions or an explanation of how someone else can recreate your project and findings (What would someone need to be able to recreate your project on their own?), and key findings and takeaways from your project.
-- a CSV file with customer_id, probability of churn, and prediction of churn. 
-- individual modules, .py files, that hold your functions to acquire and prepare your data.
-- a notebook walkthrough presentation with a high-level overview of your project (5 minutes max).
+- A Jupyter Notebook Report showing process and analysis with goal of finding drivers for customer churn.
+- A README.md file containing project description with goals, a data dictionary, project planning (lay out your process through the data science pipeline), instructions or an explanation of how someone else can recreate your project and findings (What would someone need to be able to recreate your project on their own?), and key findings and takeaways from your project.
+- A CSV file with customer_id, probability of churn, and prediction of churn. 
+- Individual modules, .py files, that hold your functions to acquire and prepare your data.
+- A notebook walkthrough presentation with a high-level overview of your project (5 minutes max).
